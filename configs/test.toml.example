@@ -10,7 +10,7 @@ dataset = "locomo10"            # "small" (1 sample, 35 QA) / "locomo10" (完整
                                 # 支持: [0, 3, 7] 列表 / "0-4" 范围 / 0 单个，不填则跑全部
 # count = 10                    # 可选：只跑前 N 道 QA 题
 memory_mode = "openviking"      # openviking / ogmem / memcore / none
-parallel = 10                   # QA 并发数 (shared policy 下强制为 1)
+parallel = 32                   # ingest/QA 并发 worker 数 (默认 32；shared policy 下 gateway 模式强制为 1)
 user = "eval-1"                 # 用户标识
 agent_id = "main"               # agent 标识 (需与 openclaw.json 中定义的 agent 一致)
 

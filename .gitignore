@@ -10,3 +10,6 @@ models/
 logs/
 draft/
 .env
+
+# local test outputs
+output/

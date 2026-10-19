@@ -103,7 +103,7 @@ class Config:
     data_file: str = ""  # explicit path overrides dataset
     samples: list[int] | None = None
     count: int | None = None
-    parallel: int = 10
+    parallel: int = 32
     user: str = "eval-1"
     agent_id: str = "main"
     memory_mode: str = "openviking"
