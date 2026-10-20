@@ -1148,9 +1148,20 @@ def _process_single_question(
 
     jsonl_filename = ""
     try:
+        # Keep QA answers grounded in recalled memories: forbid tool use so
+        # tool-happy models cannot spiral into investigation loops (which
+        # bloat the session until context overflow and yield unusable
+        # answers). The benchmark measures memory recall, not tool use.
+        qa_instructions = (
+            "Answer the question directly and concisely from the recalled "
+            "memories. Do not call any tools. Do not run commands, read files, "
+            "or investigate. If the memories do not contain the answer, say "
+            "so briefly."
+        )
         response, api_usage = send_message_with_retry(
             cfg.gateway.base_url, cfg.gateway.token, qa_user,
             input_msg, 2, cfg.agent_id, session_key,
+            instructions=qa_instructions,
         )
         print(f"  [{sample_idx}]   A: {response[:60]}{'...' if len(response) > 60 else ''}", file=sys.stderr)
 
